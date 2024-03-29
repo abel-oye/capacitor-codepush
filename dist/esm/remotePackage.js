@@ -51,12 +51,21 @@ export class RemotePackage extends Package {
                 if (yield FileUtil.fileExists(Directory.Data, file)) {
                     yield Filesystem.deleteFile({ directory: Directory.Data, path: file });
                 }
+                if (downloadProgress) {
+                    Http.addListener('progress', (e) => {
+                        downloadProgress({
+                            receivedBytes: e.bytes,
+                            totalBytes: e.contentLength
+                        });
+                    });
+                }
                 yield Http.downloadFile({
                     url: this.downloadUrl,
                     method: "GET",
                     filePath: file,
                     fileDirectory: Directory.Data,
-                    responseType: "blob"
+                    responseType: "blob",
+                    progress: !!downloadProgress,
                 });
             }
             catch (e) {

@@ -29,7 +29,7 @@
   "author": "MAPIACOMPANY",
   "license": "MIT",
   "devDependencies": {
-    "@capacitor-community/http": "^1.0.0",
+    "@capacitor-community/http": "^1.4.1",
     "@capacitor/cli": "^3.0.0",
     "@capacitor/device": "^1.0.0",
     "@capacitor/dialog": "^1.0.0",

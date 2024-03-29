@@ -6,7 +6,7 @@ import { DownloadProgress, ILocalPackage, IRemotePackage, Package } from "./pack
 import { Sdk } from "./sdk";
 import { Directory, Filesystem } from "@capacitor/filesystem";
 import { FileUtil } from "./fileUtil";
-import { Http,ProgressStatus } from "@capacitor-community/http";
+import { Http, ProgressStatus } from "@capacitor-community/http";
 
 /**
  * Defines a remote package, which represents an update package available for download.
@@ -73,7 +73,6 @@ export class RemotePackage extends Package implements IRemotePackage {
       CodePushUtil.throwError(new Error("An error occured while downloading the package. " + (e && e.message) ? e.message : ""));
     } finally {
       this.isDownloading = false;
-      Http.removeListener('progress', downloadProgress);
     }
 
     const installFailed = await NativeAppInfo.isFailedUpdate(this.packageHash);
